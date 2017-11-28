@@ -1,0 +1,112 @@
+from tkinter import *
+import math
+#Metodo
+def Hacer_click():
+    try:
+        etiqueta.config(text="El resultado de las variables es de :", fg="gray10")
+        er.config(text = "")
+        ValorAnterior= 0
+        velocidad = float(V_txt.get())
+        masa = float(M_txt.get())
+        c = float(C_txt.get())
+        c2= float(C2_txt.get())
+        tiempo = float(T_txt.get())
+        ErrorEstimado = float(Es_txt.get())
+        Formula = ((9.8 * masa) / c) * (1 - math.exp(-(c / masa) * tiempo)) - velocidad
+        Formula2 = (((9.8 * masa) / c2) * (1 - math.exp(-(c2 / masa) * tiempo))) - velocidad
+        if Formula * Formula2 < 0:
+             for ciclo in range (0,100):
+                c3 = (c + c2) / 2
+                ErrorAproximado = ((c3 - ValorAnterior) /c3) * 100
+                ValorAnterior = c3
+                Formula3 = (((9.8 * masa) / c3) * (1 - math.exp(-(c3 / masa) * tiempo))) - velocidad
+                if ErrorAproximado <0:
+                    ErrorAproximado = ErrorAproximado * -1
+                if Formula3 * Formula2 < 0:
+                    c = c3
+                elif Formula3 * Formula < 0:
+                   c2 = c3
+                if ErrorAproximado <= ErrorEstimado:
+                    It.config(text=(ciclo + 1), fg="thistle1")
+                    Xi.config(text=c, fg="thistle1")
+                    Eaa.config(text="%f" % ErrorAproximado + "%", fg="thistle1")
+                    Xi2.config(text=Formula3, fg="thistle1")
+                    break
+        else:
+            er.config(text ="Los puntos ingresados no se encuentran entre una raíz", fg="gray10")
+            etiqueta.config(text="")
+            It.config(text="")
+            Xi.config(text="")
+            Xi2.config(text="")
+            Eaa.config(text="")
+    except ValueError:
+        etiqueta.config(text="Introduce un numero en cada recuadro", fg="gray10")
+        It.config(text="")
+        Xi.config(text="")
+        Xi2.config(text="")
+        Eaa.config(text="")
+
+#Método
+#Interfaz
+Ventana = Tk()
+Ventana.title("Biseccion")
+Ventana.geometry("900x350")
+Ventana.configure(background="palegreen4")
+
+#Etiquetas
+L2 = Label(Ventana, text="Ingrese la velocidad",background="palegreen4")
+L2.grid(column=0,row=1)
+L4 = Label(Ventana,text="Ingrese el peso del objeto",background="palegreen4")
+L4.grid(column=0,row=2)
+L3 = Label(Ventana, text="Ingrese el primer punto a evaluar",background="palegreen4")
+L3.grid(column=0,row=3)
+L4 = Label(Ventana, text="Ingrese el segundo punto a evaluar",background="palegreen4")
+L4.grid(column=0,row=4)
+L5 = Label(Ventana, text="Ingrese el tiempo (en segundos)",background="palegreen4")
+L5.grid(column=0,row=5)
+L6 = Label(Ventana, text="Ingrese el error estimado",background="palegreen4")
+L6.grid(column=0,row=6)
+etiqueta = Label(Ventana,background="palegreen4")
+etiqueta.grid(column=1,row=8)
+er = Label(Ventana, background="palegreen4")
+er.grid(column=2,row=8)
+It1 = Label(Ventana,text="Iteración",background="palegreen4")
+It1.grid(column=0,row=9)
+It = Label(Ventana,background="palegreen4")
+It.grid(column=0,row=10)
+Xii = Label(Ventana,text="C",background="palegreen4")
+Xii.grid(column=1,row=9)
+Xi = Label(Ventana,background="palegreen4")
+Xi.grid(column=1,row=10)
+Xi1 = Label(Ventana,text="Error aproximado",background="palegreen4")
+Xi1.grid(column=2,row=9)
+Eaa = Label(Ventana,background="palegreen4")
+Eaa.grid(column=2,row=10)
+X2 = Label(Ventana,text="f(c)",background="palegreen4")
+X2.grid(column=3,row=9)
+Xi2 = Label(Ventana,background="palegreen4")
+Xi2.grid(column=3,row=10)
+#Variables
+V = ""
+Es = ""
+M = ""
+C = ""
+C2 = ""
+T = ""
+Es_txt = Entry(Ventana,width = 20,textvariable = Es)
+Es_txt.grid(column=1,row=6)
+V_txt = Entry(Ventana,width = 20,textvariable = V)
+V_txt.grid(column=1,row=1)
+M_txt = Entry(Ventana,width = 20, textvariable = M)
+M_txt.grid(column=1,row=2)
+C_txt = Entry(Ventana,width = 20, textvariable = C)
+C_txt.grid(column=1,row=3)
+C2_txt = Entry(Ventana,width = 20, textvariable = C2)
+C2_txt.grid(column=1,row=4)
+T_txt = Entry(Ventana,width = 20, textvariable = T)
+T_txt.grid(column=1,row=5)
+#Boton
+Boton = Button(Ventana,text="Calcular",command=Hacer_click)
+Boton.grid(column=1,row=7)
+Ventana.mainloop()
+#Interfaz
