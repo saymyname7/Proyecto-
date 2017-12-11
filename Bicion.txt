@@ -1,7 +1,4 @@
-from tkinter import *
-import math
-#Metodo
-def Hacer_click():
+click():
     try:
         etiqueta.config(text="El resultado de las variables es de :", fg="gray10")
         er.config(text = "")
@@ -33,7 +30,7 @@ def Hacer_click():
                     Xi2.config(text=Formula3, fg="thistle1")
                     break
         else:
-            er.config(text ="Los puntos ingresados no se encuentran entre una raíz", fg="gray10")
+            er.config(text ="Los puntos ingresados no se encuentran entre una raÃ­z", fg="gray10")
             etiqueta.config(text="")
             It.config(text="")
             Xi.config(text="")
@@ -46,7 +43,7 @@ def Hacer_click():
         Xi2.config(text="")
         Eaa.config(text="")
 
-#Método
+#MÃ©todo
 #Interfaz
 Ventana = Tk()
 Ventana.title("Biseccion")
@@ -70,7 +67,7 @@ etiqueta = Label(Ventana,background="palegreen4")
 etiqueta.grid(column=1,row=8)
 er = Label(Ventana, background="palegreen4")
 er.grid(column=2,row=8)
-It1 = Label(Ventana,text="Iteración",background="palegreen4")
+It1 = Label(Ventana,text="IteraciÃ³n",background="palegreen4")
 It1.grid(column=0,row=9)
 It = Label(Ventana,background="palegreen4")
 It.grid(column=0,row=10)
